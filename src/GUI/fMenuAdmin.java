@@ -11,12 +11,21 @@
 
 package GUI;
 
+
+
 /**
  *
  * @author ALUMNO-15
  */
 public class fMenuAdmin extends javax.swing.JFrame {
-
+    String[] nombreColumnasArticulos = {"Clave","Precio","Descripcion","Tipo"};
+    String[] nombreColumnasClientes = {"nombre", "apellidos","direccion","telefono","tipo","inicio","sucursal"};
+    String[] nombreColumnasEmpleados = { "nombre","apellidos","direccion","telefono","cargo","sucursal","nombreUsuario","password"};
+    String[] nombreColumnasPeliculas = { "clave","precio","descripcion","tipo","titulo","clasificacion","genero","formato","direccion","año","pais","idioma","subtitulos","venta"};
+    String[] nombreColumnasVideojuegos = { "clave","precio","descripcion","tipo","titulo","clasificacion","genero","formato","plataforma","no jugadores","venta"};
+    String[] nombreColumnasVentas = {"noTransaccion", "articulo", "cantidad", "total"}; 
+    String[] nombreColumnasRentas = {"noTransaccion", "articulo", "inicio","entrega"}; 
+    String[] nombreColumnasTransacciones = {"nombreUsuario","fecha","noMembresia","sucursal","artTotal","total"}; 
     /** Creates new form fMenuAdmin */
     public fMenuAdmin() {
         initComponents();
@@ -43,17 +52,6 @@ public class fMenuAdmin extends javax.swing.JFrame {
 
         fMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Articulos", "Videojuegos", "Peliculas", "Rentas", "Ventas", "Transacciones", "Clientes", "Empleados" }));
 
-        fTabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         jScrollPane1.setViewportView(fTabla);
 
         fNuevo.setText("Nuevo...");

@@ -490,8 +490,8 @@ public class Conexion {
          }
     }
     
-    public void guardarPelicula(){
-        Pelicula[] pelicula=new Pelicula[100];
+    public Object[][] guardarPelicula(){
+        Object[][] pelicula = new Object [100][14];
         abrirConexion();
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("pelicula");
@@ -505,54 +505,54 @@ public class Conexion {
             columna = columnas.getColumns();
             c = columna.iterator();
             for(int i=0;i<100;i++){
-                pelicula[i]=new Pelicula();
                 while(c.hasNext()){
                     dupla = c.next();
                     if(dupla.getName().equals("clave")){
-                        pelicula[i].setClave(dupla.getValue());
+                        pelicula[i][0] = dupla.getValue();
                     }
                     if(dupla.getName().equals("precio")){
-                        pelicula[i].setPrecio(Float.parseFloat(dupla.getValue()));
+                        pelicula[i][1] = dupla.getValue();
                     }
                     if(dupla.getName().equals("descripcion")){
-                        pelicula[i].setDescripcion(dupla.getValue());
+                        pelicula[i][2] = dupla.getValue();
                     }
                     if(dupla.getName().equals("tipo")){
-                        pelicula[i].setTipo(dupla.getValue());
+                        pelicula[i][3] = dupla.getValue();
                     }
                     if(dupla.getName().equals("titulo")){
-                        pelicula[i].setTitulo(dupla.getValue());
+                        pelicula[i][4] = dupla.getValue();
                     }
                     if(dupla.getName().equals("clasificacion")){
-                        pelicula[i].setClasificacion(dupla.getValue());
+                        pelicula[i][5] = dupla.getValue();
                     }
                     if(dupla.getName().equals("genero")){
-                        pelicula[i].setGenero(dupla.getValue());
+                        pelicula[i][6] = dupla.getValue();
                     }
                     if(dupla.getName().equals("formato")){
-                        pelicula[i].setFormato(dupla.getValue());
+                        pelicula[i][7] = dupla.getValue();
                     }
                     if(dupla.getName().equals("venta")){
-                        pelicula[i].setVenta(dupla.getValue());
+                        pelicula[i][8] = dupla.getValue();
                     }
                     if(dupla.getName().equals("direccion")){
-                        pelicula[i].setDireccion(dupla.getValue());
+                        pelicula[i][9] = dupla.getValue();
                     }
                     if(dupla.getName().equals("año")){
-                        pelicula[i].setAño(dupla.getValue());
+                        pelicula[i][10] = dupla.getValue();
                     }
                     if(dupla.getName().equals("pais")){
-                        pelicula[i].setPais(dupla.getValue());
+                        pelicula[i][11]= dupla.getValue();
                     }
                     if(dupla.getName().equals("idioma")){
-                        pelicula[i].setIdioma(dupla.getValue());
+                        pelicula[i][12] = dupla.getValue();
                     }
                     if(dupla.getName().equals("subtitulos")){
-                        pelicula[i].setSubtitulos(dupla.getValue());
+                        pelicula[i][13] = dupla.getValue();
                     }
                 }
             }
         }
+        return pelicula;
     }
     
     public void guardaVideojuego(){

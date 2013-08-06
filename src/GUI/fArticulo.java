@@ -4,20 +4,17 @@
  */
 package GUI;
 import entidades.Articulo;
-import entidades.Cliente;
-import entidades.Pelicula;
-import entidades.Usuario;
-import entidades.Videojuego;
 import control.Conexion;
+import entidades.Pelicula;
 /**
  *
  * @author CEREBROII
  */
 public class fArticulo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form fArticulo
-     */
+    
+    Conexion conec;
+    Articulo art;
     public fArticulo() {
         initComponents();
     }

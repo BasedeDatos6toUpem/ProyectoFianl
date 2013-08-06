@@ -4,15 +4,17 @@
  */
 package GUI;
 
+import control.Conexion;
+import entidades.Cliente;
+
 /**
  *
  * @author CEREBROII
  */
 public class fClientes extends javax.swing.JFrame {
 
-    /**
-     * Creates new form fClientes
-     */
+    Cliente cliente;
+    Conexion conec;
     public fClientes() {
         initComponents();
     }
@@ -151,7 +153,10 @@ public class fClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
-        // TODO add your handling code here:
+        conec = new Conexion("localhost","clustersito");
+        cliente = new Cliente(tNombre.getText(), tApellidos.getText(), tDireccion.getText(), tTelefono.getText(), String.valueOf(cbTipo.getSelectedItem()), tInicio.getText(),"Jiutepec");
+        conec.insertarCliente(cliente);
+        conec.cerrarConexion();
     }//GEN-LAST:event_bOkActionPerformed
 
     private void tAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tAdeudoActionPerformed

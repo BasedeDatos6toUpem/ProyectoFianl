@@ -11,6 +11,9 @@
 
 package GUI;
 
+import control.Conexion;
+import javax.swing.JTable;
+
 
 
 /**
@@ -25,10 +28,12 @@ public class fMenuAdmin extends javax.swing.JFrame {
     String[] nombreColumnasVideojuegos = { "clave","precio","descripcion","tipo","titulo","clasificacion","genero","formato","plataforma","no jugadores","venta"};
     String[] nombreColumnasVentas = {"noTransaccion", "articulo", "cantidad", "total"}; 
     String[] nombreColumnasRentas = {"noTransaccion", "articulo", "inicio","entrega"}; 
-    String[] nombreColumnasTransacciones = {"nombreUsuario","fecha","noMembresia","sucursal","artTotal","total"}; 
+    String[] nombreColumnasTransacciones = {"nombreUsuario","fecha","noMembresia","sucursal","artTotal","total"};
+    Conexion conec;
     /** Creates new form fMenuAdmin */
     public fMenuAdmin() {
         initComponents();
+        conec = new Conexion("localhost","clustersito");
     }
 
     /** This method is called from within the constructor to
@@ -40,7 +45,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fMenu = new javax.swing.JComboBox();
+        lMenu = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         fTabla = new javax.swing.JTable();
         fNuevo = new javax.swing.JButton();
@@ -50,7 +55,12 @@ public class fMenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
 
-        fMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Articulos", "Videojuegos", "Peliculas", "Rentas", "Ventas", "Transacciones", "Clientes", "Empleados" }));
+        lMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Articulos", "Videojuegos", "Peliculas", "Rentas", "Ventas", "Transacciones", "Clientes", "Empleados" }));
+        lMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lMenuActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(fTabla);
 
@@ -73,7 +83,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-                    .addComponent(fMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(fNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -86,7 +96,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -102,14 +112,25 @@ public class fMenuAdmin extends javax.swing.JFrame {
 
     private void fNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fNuevoActionPerformed
         fArticulo arti = new fArticulo();
-        String opc=(String)fMenu.getSelectedItem();
+        fClientes cliente = new fClientes();
+        String opc=(String)lMenu.getSelectedItem();
         switch(opc){
             case "Articulos":
                 arti.setVisible(true);
             break;
+                
+            case "Clientes":
+                cliente.setVisible(true);
+            break;
         }
         
     }//GEN-LAST:event_fNuevoActionPerformed
+
+    private void lMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMenuActionPerformed
+        if (lMenu.getSelectedIndex() == 2){
+            fTabla = new JTable(conec.guardarPelicula(),nombreColumnasPeliculas);//asi se muestran los datos en la tabla, la tabla no es editable
+        }
+    }//GEN-LAST:event_lMenuActionPerformed
 
     /**
     * @param args the command line arguments
@@ -124,11 +145,11 @@ public class fMenuAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton fEliminar;
-    private javax.swing.JComboBox fMenu;
     private javax.swing.JButton fModificar;
     private javax.swing.JButton fNuevo;
     private javax.swing.JTable fTabla;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox lMenu;
     // End of variables declaration//GEN-END:variables
 
 }

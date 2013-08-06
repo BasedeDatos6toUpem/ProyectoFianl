@@ -4,15 +4,17 @@
  */
 package GUI;
 
+import control.Conexion;
+import entidades.Usuario;
+
 /**
  *
  * @author CEREBROII
  */
 public class fUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form fUsuarios
-     */
+    Usuario usuario;
+    Conexion conec;
     public fUsuarios() {
         initComponents();
     }
@@ -172,7 +174,10 @@ public class fUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
-        
+        conec = new Conexion("localhost","clustersito");
+        usuario = new Usuario(tNombre.getText(), tApellidos.getText(), tDireccion.getText(), tTelefono.getText(),String.valueOf(cbPuesto.getSelectedItem()),tNombreUsu.getText(),String.valueOf(tClave.getPassword()),"Jiutepec");
+        conec.insertarCliente(usuario);
+        conec.cerrarConexion();        
     }//GEN-LAST:event_bOkActionPerformed
 
     /**

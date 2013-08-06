@@ -116,6 +116,7 @@ public class fLog extends javax.swing.JFrame {
         usu=conec.guardaUsuario();
         for(int i=0;i<usu.length;i++){
             if(usu[i].getNombreUsuario().equalsIgnoreCase(nom)&&usu[i].getPassword().equalsIgnoreCase(clav)){
+                conec.cerrarConexion();//Cerramos la conexion para evitar sobrecarga
                 menu.setVisible(true);
             }
         }

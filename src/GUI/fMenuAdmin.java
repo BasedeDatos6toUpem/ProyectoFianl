@@ -12,6 +12,8 @@
 package GUI;
 
 import control.Conexion;
+import entidades.Articulo;
+import entidades.Cliente;
 import javax.swing.JTable;
 
 
@@ -31,7 +33,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
     /** Creates new form fMenuAdmin */
     public fMenuAdmin() {
         initComponents();
-        conec = new Conexion("localhost","clustersito");
+        conec = new Conexion("iMovie","clustersito");
     }
 
     /** This method is called from within the constructor to
@@ -70,6 +72,11 @@ public class fMenuAdmin extends javax.swing.JFrame {
         });
 
         fModificar.setText("Modificar");
+        fModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fModificarActionPerformed(evt);
+            }
+        });
 
         fEliminar.setText("Eliminar");
 
@@ -110,7 +117,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
 
     private void fNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fNuevoActionPerformed
         fArticulo arti = new fArticulo();
-        fClientes cliente = new fClientes();
+        
         String opc=(String)lMenu.getSelectedItem();
         switch(opc){
             case "Articulos":
@@ -118,7 +125,21 @@ public class fMenuAdmin extends javax.swing.JFrame {
             break;
                 
             case "Clientes":
+                fClientes cliente = new fClientes();
                 cliente.setVisible(true);
+            break;
+            
+            case "Empleados":
+                fUsuarios usuario = new fUsuarios();
+                usuario.setVisible(true);
+            break;
+            
+            case "Videojuegos":
+                arti.setVisible(true);
+            break;
+            
+            case "Peliculas":
+                arti.setVisible(true);
             break;
         }
         
@@ -142,6 +163,44 @@ public class fMenuAdmin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_lMenuActionPerformed
+
+    private void fModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fModificarActionPerformed
+         
+        String opc=(String)lMenu.getSelectedItem();
+        switch(opc){
+            case "Articulos":
+                
+            break;
+                
+            case "Clientes":
+                String[] datosLeidos = {
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 0)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 1)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 2)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 3)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 4)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 5)),
+                    String.valueOf(fTabla.getValueAt(fTabla.getSelectedRow(), 6))
+                };
+                Cliente cliente = new Cliente( datosLeidos[0],datosLeidos[1],datosLeidos[2],datosLeidos[3],datosLeidos[4],datosLeidos[5],datosLeidos[6]);
+                conec.modificarCliente(cliente);
+                
+            break;
+            
+            case "Empleados":
+                
+            break;
+            
+            case "Videojuegos":
+                
+            break;
+            
+            case "Peliculas":
+                
+            break;
+        }
+         
+    }//GEN-LAST:event_fModificarActionPerformed
 
     /**
     * @param args the command line arguments

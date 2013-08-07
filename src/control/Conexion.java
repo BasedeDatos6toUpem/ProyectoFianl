@@ -37,7 +37,6 @@ public class Conexion {
     static Keyspace keyspace;
     public String tabla;
     private String ip;
-    private String nombreCluster;
     private String nombreKeyspace;
     static StringSerializer stringSerializer = StringSerializer.get();
     static ListIterator<Row<String, String, String>> resultado;
@@ -45,9 +44,9 @@ public class Conexion {
     private Iterator<HColumn<String, String>> c;
     private HColumn<String, String> dupla;
 
-    public Conexion(String ip, String nombreCluster) {
+    public Conexion(String ip, String nombreKeyspace) {
         this.ip = ip;
-        this.nombreCluster = nombreCluster;
+        this.nombreKeyspace = nombreKeyspace;
     }
 
     public String getTabla() {
@@ -62,7 +61,7 @@ public class Conexion {
     public Keyspace abrirConexion() {
         try {
             cluster = HFactory.getOrCreateCluster("clustersito","localhost:9160");
-            keyspace = HFactory.createKeyspace(nombreCluster, cluster);
+            keyspace = HFactory.createKeyspace(nombreKeyspace, cluster);
             return keyspace;
         }catch (Exception ex) {
     		System.out.println("Error encontrado en conexion!!");

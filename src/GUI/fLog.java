@@ -108,14 +108,14 @@ public class fLog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
-        Usuario [] usu = new Usuario [100];
+        Object [][] usu = new Object [100][8];
         fMenuAdmin menu = new fMenuAdmin ();
         String nom = fUsuario.getText();
         String clav = fClave.getText();
         Conexion conec = new Conexion("localhost","clustersito");
         usu=conec.guardaUsuario();
         for(int i=0;i<usu.length;i++){
-            if(usu[i].getNombreUsuario().equalsIgnoreCase(nom)&&usu[i].getPassword().equalsIgnoreCase(clav)){
+            if(usu[i][5].equals(nom)&&usu[i][6].equals(clav)){
                 conec.cerrarConexion();//Cerramos la conexion para evitar sobrecarga
                 menu.setVisible(true);
             }

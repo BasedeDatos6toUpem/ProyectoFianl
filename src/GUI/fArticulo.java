@@ -6,6 +6,7 @@ package GUI;
 import entidades.Articulo;
 import control.Conexion;
 import entidades.Pelicula;
+import entidades.Videojuego;
 /**
  *
  * @author CEREBROII
@@ -239,17 +240,36 @@ public class fArticulo extends javax.swing.JFrame {
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
         Articulo arti = new Articulo ();
         Pelicula peli = new Pelicula ();
+        Videojuego vide = new Videojuego ();
         String opc=(String)aArticulo.getSelectedItem();
         switch(opc){
         case "Pelicula": 
+            peli.setClave(aClave.getText());
+            peli.setDescripcion(aDescripcion.getText());
+            peli.setPrecio(Float.parseFloat(aPrecio.getText()));
+            peli.setAño(aAnio.getText());
+            peli.setClasificacion(aClasificacion.getText());
+            peli.setTipo((String)aTipo.getSelectedItem());
+            
+        break;
+        case "Videojuego": 
+            vide.setClave(aClave.getText());
+            vide.setDescripcion(aDescripcion.getText());
+            vide.setPrecio(Float.parseFloat(aPrecio.getText()));
+            vide.setPlataforma(aPlataforma.getText());
+            vide.setClasificacion(aClasificacion.getText());
+            vide.setTipo((String)aTipo.getSelectedItem());
+            
+        break;    
+        case "Otro": 
             arti.setClave(aClave.getText());
             arti.setDescripcion(aDescripcion.getText());
             arti.setPrecio(Float.parseFloat(aPrecio.getText()));
-            peli.setAño(aAnio.getText());
-            peli.setClasificacion(aClasificacion.getText());
             arti.setTipo((String)aTipo.getSelectedItem());
             
-        break;
+        break;  
+            
+
         }
        
         

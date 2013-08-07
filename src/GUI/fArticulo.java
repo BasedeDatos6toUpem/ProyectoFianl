@@ -242,7 +242,6 @@ public class fArticulo extends javax.swing.JFrame {
         Videojuego vide = new Videojuego ();
         String opc=(String)aArticulo.getSelectedItem();
         Conexion conec = new Conexion("iMovie","clustersito");
-        conec.abrirConexion();
         switch(opc){
         case "Pelicula": 
             peli.setClave(aClave.getText());

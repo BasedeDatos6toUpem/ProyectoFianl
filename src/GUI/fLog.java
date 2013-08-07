@@ -113,11 +113,9 @@ public class fLog extends javax.swing.JFrame {
         String nom = fUsuario.getText();
         String clav = fClave.getText();
         Conexion conec = new Conexion("iMovie","clustersito");
-        conec.abrirConexion();
         usu=conec.guardaUsuario();
         for(int i=0;i<usu.length;i++){
             if(usu[i][5].equals(nom)&&usu[i][6].equals(clav)){
-                conec.cerrarConexion();//Cerramos la conexion para evitar sobrecarga
                 menu.setVisible(true);
             }
         }

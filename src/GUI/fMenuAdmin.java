@@ -34,7 +34,6 @@ public class fMenuAdmin extends javax.swing.JFrame {
     public fMenuAdmin() {
         initComponents();
         conec = new Conexion("iMovie","clustersito");
-        conec.abrirConexion();
     }
 
     /** This method is called from within the constructor to

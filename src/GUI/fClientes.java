@@ -154,10 +154,8 @@ public class fClientes extends javax.swing.JFrame {
 
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
         conec = new Conexion("iMovie","clustersito");
-        conec.abrirConexion();
         cliente = new Cliente(tNombre.getText(), tApellidos.getText(), tDireccion.getText(), tTelefono.getText(), String.valueOf(cbTipo.getSelectedItem()), tInicio.getText(),"Jiutepec");
         conec.insertarCliente(cliente);
-        conec.cerrarConexion();
     }//GEN-LAST:event_bOkActionPerformed
 
     private void tAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tAdeudoActionPerformed

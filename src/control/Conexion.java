@@ -23,6 +23,7 @@ import me.prettyprint.hector.api.beans.Row;
 import me.prettyprint.hector.api.beans.Rows;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
+import me.prettyprint.hector.api.query.ColumnQuery;
 import me.prettyprint.hector.api.query.MultigetSliceQuery;
 import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.RangeSlicesQuery;
@@ -33,8 +34,6 @@ import me.prettyprint.hector.api.query.SliceQuery;
  * @author ALUMNO-15
  */
 public class Conexion {
-    static Cluster cluster;
-    static Keyspace keyspace;
     public String tabla;
     private String ip;
     private String nombreKeyspace;
@@ -58,29 +57,17 @@ public class Conexion {
     }
       
 
-    public Keyspace abrirConexion() {
-        try {
-            cluster = HFactory.getOrCreateCluster("clustersito","localhost:9160");
-            keyspace = HFactory.createKeyspace(nombreKeyspace, cluster);
-            return keyspace;
-        }catch (Exception ex) {
-    		System.out.println("Error encontrado en conexion!!");
-    	}
-        return null;
-    }
+    
 
-    public void cerrarConexion() {
-        try {
-            cluster.getConnectionManager().shutdown();
-        }catch (Exception ex) {
-    		System.out.println("Error encontrado en conexion!!");
-    	}
-    }
+    
     
     public void insertarCliente(Cliente cliente) {
+        
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
+            
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("adeudo", cliente.getAdeudo()));
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("apellidos", cliente.getApellidos()));
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("direccion", cliente.getDireccion()));
@@ -89,16 +76,22 @@ public class Conexion {
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("telefono", cliente.getTelefono()));
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("tipo", cliente.getTipo()));
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("surcursal", cliente.getSucursal()));
-        } catch (Exception ex) {
+
+            System.out.println("Datos insertados");
+            System.out.println();
+         } catch (Exception ex) {
             System.out.println("Error encontrado mientras se insertaban datos!!");
-            ex.printStackTrace() ;
-        }
+                        ex.printStackTrace() ;
+         }
     }
     
     public void insertarCliente(Usuario usuario) {
+
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
+            
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("apellidos", usuario.getApellidos()));
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("direccion", usuario.getDireccion()));
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("cargo", usuario.getCargo()));
@@ -107,29 +100,40 @@ public class Conexion {
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("noUsuario", usuario.getNombreUsuario()));
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("password", usuario.getPassword()));
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("surcursal", usuario.getSucursal()));
-        } catch (Exception ex) {
+
+            System.out.println("Datos insertados");
+            System.out.println();
+         } catch (Exception ex) {
             System.out.println("Error encontrado mientras se insertaban datos!!");
-            ex.printStackTrace() ;
-        }
+                        ex.printStackTrace() ;
+         }
+        
     }
     
     public void insertarArticulo(Articulo articulo) {
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
+            
             mutator.insert(articulo.getClave(), "articulo", HFactory.createStringColumn("clave", articulo.getClave()));
             mutator.insert(articulo.getClave(), "articulo", HFactory.createStringColumn("precio", String.valueOf(articulo.getPrecio())));
             mutator.insert(articulo.getClave(), "articulo", HFactory.createStringColumn("descripcion", articulo.getDescripcion()));
             mutator.insert(articulo.getClave(), "articulo", HFactory.createStringColumn("tipo", "otros"));
-        } catch (Exception ex) {
+
+            System.out.println("Datos insertados");
+            System.out.println();
+         } catch (Exception ex) {
             System.out.println("Error encontrado mientras se insertaban datos!!");
-            ex.printStackTrace() ;
-        }
+                        ex.printStackTrace() ;
+         }
     }
     public void insertarPeliculas(Pelicula pelicula) {
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
+            
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("clave", pelicula.getClave()));
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("precio", String.valueOf(pelicula.getPrecio())));
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("descripcion", pelicula.getDescripcion()));
@@ -146,16 +150,21 @@ public class Conexion {
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("pais", pelicula.getPais()));
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("idioma", pelicula.getIdioma()));
             mutator.insert(pelicula.getClave(), "pelicula", HFactory.createStringColumn("subtitulos", pelicula.getSubtitulos()));
-        } catch (Exception ex) {
+
+            System.out.println("Datos insertados");
+            System.out.println();
+         } catch (Exception ex) {
             System.out.println("Error encontrado mientras se insertaban datos!!");
-            ex.printStackTrace() ;
-        }
+                        ex.printStackTrace() ;
+         }
     }
     
     public void insertarVideojuegos(Videojuego videojuego) {
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
+            
             mutator.insert(videojuego.getClave(), "videojuego", HFactory.createStringColumn("clave", videojuego.getClave()));
             mutator.insert(videojuego.getClave(), "videojuego", HFactory.createStringColumn("precio", String.valueOf(videojuego.getPrecio())));
             mutator.insert(videojuego.getClave(), "videojuego", HFactory.createStringColumn("descripcion", videojuego.getDescripcion()));
@@ -169,15 +178,20 @@ public class Conexion {
             
             mutator.insert(videojuego.getClave(), "videojuego", HFactory.createStringColumn("plataforma", videojuego.getPlataforma()));
             mutator.insert(videojuego.getClave(), "videojuego", HFactory.createStringColumn("noJugadores", videojuego.getNoJugadores()));
-        } catch (Exception ex) {
+
+            System.out.println("Datos insertados");
+            System.out.println();
+         } catch (Exception ex) {
             System.out.println("Error encontrado mientras se insertaban datos!!");
-            ex.printStackTrace() ;
-        }
+                        ex.printStackTrace() ;
+         }
+        
     }
     
     public void borrarCliente(Cliente cliente) {
         try {
-            abrirConexion();
+            Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             mutator.delete(cliente.getAdeudo(),"clientes",null, stringSerializer);
             mutator.delete(cliente.getApellidos(),"clientes",null, stringSerializer);
@@ -203,7 +217,8 @@ public class Conexion {
     
     public void borrarArticulo(Articulo articulo) {
         try {
-            abrirConexion();
+             Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             mutator.delete(String.valueOf(articulo.getPrecio()),"articulo",null, stringSerializer);
@@ -226,7 +241,8 @@ public class Conexion {
     
     public void borrarPelicula(Pelicula pelicula) {
         try {
-            abrirConexion();           
+             Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);          
             
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             mutator.delete(String.valueOf(pelicula.getPrecio()),"pelicula",null, stringSerializer);
@@ -258,7 +274,8 @@ public class Conexion {
     
     public void borrarVideojuego(Videojuego videojuego) {
         try {
-            abrirConexion();
+             Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             mutator.delete(String.valueOf(videojuego.getPrecio()),"videojuego",null, stringSerializer);
@@ -287,7 +304,8 @@ public class Conexion {
     
     public void modificarCliente(Cliente cliente) {
         try {
-            abrirConexion();
+             Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             
             mutator.insert(cliente.getClave(), "clientes", HFactory.createStringColumn("adeudo", cliente.getAdeudo()));
@@ -323,7 +341,8 @@ public class Conexion {
     
     public void modificarUsuario(Usuario usuario) {
         try {
-            abrirConexion();
+             Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
             Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
             
             mutator.insert(usuario.getClave(), "usuario", HFactory.createStringColumn("apellidos", usuario.getApellidos()));
@@ -360,7 +379,8 @@ public class Conexion {
    public Object[][] guardarCliente(){
         Object cliente1[][];
         cliente1=new Object[100][8];
-        abrirConexion();
+        Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+        Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("clientes");
         rangeSlicesQuery.setKeys("","");
@@ -407,7 +427,8 @@ public class Conexion {
     
     public Object[][] guardaUsuario(){
         Object[][] usu=new Object[100][8];
-        abrirConexion();
+         Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("usuario");
         rangeSlicesQuery.setKeys("","");
@@ -455,7 +476,8 @@ public class Conexion {
     
      public Object[][] guardarArticulo(){
         Object[][] articulo=new Object[100][4];
-        abrirConexion();
+         Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("articulo");
         rangeSlicesQuery.setKeys("","");
@@ -490,7 +512,8 @@ public class Conexion {
     
     public Object[][] guardarPelicula(){
         Object[][] pelicula = new Object [100][14];
-        abrirConexion();
+         Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("pelicula");
         rangeSlicesQuery.setKeys("","");
@@ -555,7 +578,8 @@ public class Conexion {
     
     public Object[][] guardaVideojuego(){
         Object[][] video=new Object[100][11];
-        abrirConexion();
+         Cluster cluster = HFactory.getOrCreateCluster("clustersito", "localhost:9160");
+            Keyspace keyspace = HFactory.createKeyspace("iMovie", cluster);
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("videojuego");
         rangeSlicesQuery.setKeys("","");

@@ -26,9 +26,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
     String[] nombreColumnasEmpleados = { "nombre","apellidos","direccion","telefono","cargo","sucursal","nombreUsuario","password"};
     String[] nombreColumnasPeliculas = { "clave","precio","descripcion","tipo","titulo","clasificacion","genero","formato","direccion","año","pais","idioma","subtitulos","venta"};
     String[] nombreColumnasVideojuegos = { "clave","precio","descripcion","tipo","titulo","clasificacion","genero","formato","plataforma","no jugadores","venta"};
-    String[] nombreColumnasVentas = {"noTransaccion", "articulo", "cantidad", "total"}; 
-    String[] nombreColumnasRentas = {"noTransaccion", "articulo", "inicio","entrega"}; 
-    String[] nombreColumnasTransacciones = {"nombreUsuario","fecha","noMembresia","sucursal","artTotal","total"};
+    
     Conexion conec;
     /** Creates new form fMenuAdmin */
     public fMenuAdmin() {
@@ -55,7 +53,7 @@ public class fMenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
 
-        lMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Articulos", "Videojuegos", "Peliculas", "Rentas", "Ventas", "Transacciones", "Clientes", "Empleados" }));
+        lMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Articulos", "Videojuegos", "Peliculas", "Clientes", "Empleados" }));
         lMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lMenuActionPerformed(evt);
@@ -127,9 +125,22 @@ public class fMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_fNuevoActionPerformed
 
     private void lMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMenuActionPerformed
-        if (lMenu.getSelectedIndex() == 2){
-            fTabla = new JTable(conec.guardarPelicula(),nombreColumnasPeliculas);//asi se muestran los datos en la tabla, la tabla no es editable
+        if (lMenu.getSelectedIndex() == 0){
+            fTabla = new JTable(conec.guardarArticulo(),nombreColumnasArticulos);//asi se muestran los datos en la tabla, la tabla no es editable
         }
+        if (lMenu.getSelectedIndex() == 1){
+            fTabla = new JTable(conec.guardaVideojuego(),nombreColumnasVideojuegos);
+        }
+        if (lMenu.getSelectedIndex() == 2){
+            fTabla = new JTable(conec.guardarPelicula(),nombreColumnasPeliculas);
+        }
+        if (lMenu.getSelectedIndex() == 3){
+            fTabla = new JTable(conec.guardarCliente(),nombreColumnasClientes);
+        }
+        if (lMenu.getSelectedIndex() == 4){
+            fTabla = new JTable(conec.guardaUsuario(),nombreColumnasEmpleados);
+        }
+        
     }//GEN-LAST:event_lMenuActionPerformed
 
     /**

@@ -358,9 +358,9 @@ public class Conexion {
     	}
     }
     
-    public void guardarCliente(){
-        Cliente cliente1[];
-        cliente1=new Cliente[100];
+   public Object[][] guardarCliente(){
+        Object cliente1[][];
+        cliente1=new Object[100][8];
         abrirConexion();
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("clientes");
@@ -374,40 +374,40 @@ public class Conexion {
              columna = columnas.getColumns();
              c = columna.iterator();
              for(int i=0;i<100;i++){
-                  cliente1[i]=new Cliente();
                 while(c.hasNext()){
                     dupla = c.next();
                      if(dupla.getName().equals("adeudo")){ 
-                         cliente1[i].setAdeudo(dupla.getValue());
+                         cliente1[i][0]=dupla.getValue();
                      }
                         if(dupla.getName().equals("apellidos")){
-                            cliente1[i].setApellidos(dupla.getValue());
+                            cliente1[i][1]=dupla.getValue();
                         }
                             if(dupla.getName().equals("direccion")){
-                                cliente1[i].setDireccion(dupla.getValue());
+                                cliente1[i][2]=dupla.getValue();
                             }
                                 if(dupla.getName().equals("inicio")){
-                                    cliente1[i].setInicio(dupla.getValue());
+                                    cliente1[i][3]=dupla.getValue();
                                 }
                                     if(dupla.getName().equals("nombre")){
-                                        cliente1[i].setNombre(dupla.getValue());
+                                        cliente1[i][4]=dupla.getValue();
                                     }
                                         if(dupla.getName().equals("telefono")){
-                                            cliente1[i].setTelefono(dupla.getValue());
+                                            cliente1[i][5]=dupla.getValue();
                                         }
                                             if(dupla.getName().equals("tipo")){
-                                                cliente1[i].setTipo(dupla.getValue());
+                                                cliente1[i][6]=dupla.getValue();
                                             }
                                                 if(dupla.getName().equals("sucursal")){
-                                                    cliente1[i].setSucursal(dupla.getValue());
+                                                    cliente1[i][7]=dupla.getValue();
                                                 }
                   }
              }
         }
+         return cliente1;
     }
     
-    public Usuario [] guardaUsuario(){
-        Usuario[] usu=new Usuario[100];
+    public Object[][] guardaUsuario(){
+        Object[][] usu=new Object[100][8];
         abrirConexion();
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("usuario");
@@ -421,32 +421,31 @@ public class Conexion {
              columna = columnas.getColumns();
              c = columna.iterator();
              for(int i=0;i<100;i++){
-                 usu[i]=new Usuario();
                  while(c.hasNext()){
                      dupla = c.next();
                      if(dupla.getName().equals("apellidos")){
-                         usu[i].setApellidos(dupla.getValue());
+                         usu[i][0]=dupla.getValue();
                      }
                          if(dupla.getName().equals("direccion")){
-                             usu[i].setDireccion(dupla.getValue());
+                             usu[i][1]=dupla.getValue();
                          }
                              if(dupla.getName().equals("cargo")){
-                                 usu[i].setCargo(dupla.getValue());
+                                 usu[i][2]=dupla.getValue();
                              }
                                  if(dupla.getName().equals("nombre")){
-                                     usu[i].setNombre(dupla.getValue());
+                                     usu[i][3]=dupla.getValue();
                                  }
                                      if(dupla.getName().equals("telefono")){
-                                         usu[i].setTelefono(dupla.getValue());
+                                         usu[i][4]=dupla.getValue();
                                      }
                                          if(dupla.getName().equals("noUsuario")){
-                                             usu[i].setNombreUsuario(dupla.getValue());
+                                             usu[i][5]=dupla.getValue();
                                          }
                                              if(dupla.getName().equals("password")){
-                                                 usu[i].setPassword(dupla.getValue());
+                                                 usu[i][6]=dupla.getValue();
                                              }
                                                  if(dupla.getName().equals("sucursal")){
-                                                     usu[i].setSucursal(dupla.getValue());
+                                                     usu[i][7]=dupla.getValue();
                                                  }
                 }
             }
@@ -455,8 +454,8 @@ public class Conexion {
     }
     
     
-    public void guardarArticulo(){
-        Articulo[] articulo=new Articulo[100];
+     public Object[][] guardarArticulo(){
+        Object[][] articulo=new Object[100][4];
         abrirConexion();
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("articulo");
@@ -470,24 +469,24 @@ public class Conexion {
              columna = columnas.getColumns();
              c = columna.iterator();
              for(int i=0;i<100;i++){
-                 articulo[i]=new Articulo();
                  while(c.hasNext()){
                      dupla = c.next();
                      if(dupla.getName().equals("clave")){
-                         articulo[i].setClave(dupla.getValue());
+                         articulo[i][0]=dupla.getValue();
                      }
                      if(dupla.getName().equals("precio")){
-                         articulo[i].setPrecio(Float.parseFloat(dupla.getValue()));
+                         articulo[i][1]=dupla.getValue();
                      }
                      if(dupla.getName().equals("descripcion")){
-                         articulo[i].setDescripcion(dupla.getValue());
+                         articulo[i][2]=dupla.getValue();
                      }
                      if(dupla.getName().equals("tipo")){
-                         articulo[i].setTipo(dupla.getValue());
+                         articulo[i][3]=dupla.getValue();
                      }
                  }
              }
          }
+         return articulo;
     }
     
     public Object[][] guardarPelicula(){
@@ -555,8 +554,8 @@ public class Conexion {
         return pelicula;
     }
     
-    public void guardaVideojuego(){
-        Videojuego[] video=new Videojuego[100];
+    public Object[][] guardaVideojuego(){
+        Object[][] video=new Object[100][11];
         abrirConexion();
         RangeSlicesQuery<String,String,String> rangeSlicesQuery= HFactory.createRangeSlicesQuery(keyspace, stringSerializer, stringSerializer, stringSerializer);
         rangeSlicesQuery.setColumnFamily("videojuego");
@@ -570,44 +569,44 @@ public class Conexion {
             columna = columnas.getColumns();
             c = columna.iterator();
             for(int i=0;i<100;i++){
-                video[i]=new Videojuego();
                 while(c.hasNext()){
                     dupla = c.next();
                     if(dupla.getName().equals("clave")){
-                        video[i].setClave(dupla.getValue());
+                        video[i][0]=dupla.getValue();
                     }
                     if(dupla.getName().equals("precio")){
-                        video[i].setPrecio(Float.parseFloat(dupla.getValue()));
+                        video[i][1]=Float.parseFloat(dupla.getValue());
                     }
                     if(dupla.getName().equals("descripcion")){
-                        video[i].setDescripcion(dupla.getValue());
+                        video[i][2]=dupla.getValue();
                     }
                     if(dupla.getName().equals("tipo")){
-                        video[i].setTipo(dupla.getValue());
+                        video[i][3]=dupla.getValue();
                     }
                     if(dupla.getName().equals("titulo")){
-                        video[i].setTitulo(dupla.getValue());
+                        video[i][4]=dupla.getValue();
                     }
                     if(dupla.getName().equals("clasificacion")){
-                        video[i].setClasificacion(dupla.getValue());
+                        video[i][5]=dupla.getValue();
                     }
                     if(dupla.getName().equals("genero")){
-                        video[i].setGenero(dupla.getValue());
+                        video[i][6]=dupla.getValue();
                     }
                     if(dupla.getName().equals("formato")){
-                        video[i].setFormato(dupla.getValue());
+                        video[i][7]=dupla.getValue();
                     }
                     if(dupla.getName().equals("venta")){
-                        video[i].setVenta(dupla.getValue());
+                        video[i][8]=dupla.getValue();
                     }
                     if(dupla.getName().equals("plataforma")){
-                        video[i].setPlataforma(dupla.getValue());
+                        video[i][9]=dupla.getValue();
                     }
                     if(dupla.getName().equals("noJugadores")){
-                        video[i].setNoJugadores(dupla.getValue());
+                        video[i][10]=dupla.getValue();
                     }
                 }
             }
         }
+        return video;
     }
 }

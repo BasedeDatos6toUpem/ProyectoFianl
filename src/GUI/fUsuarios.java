@@ -175,6 +175,7 @@ public class fUsuarios extends javax.swing.JFrame {
 
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
         conec = new Conexion("localhost","clustersito");
+        conec.abrirConexion();
         usuario = new Usuario(tNombre.getText(), tApellidos.getText(), tDireccion.getText(), tTelefono.getText(),String.valueOf(cbPuesto.getSelectedItem()),tNombreUsu.getText(),String.valueOf(tClave.getPassword()),"Jiutepec");
         conec.insertarCliente(usuario);
         conec.cerrarConexion();        

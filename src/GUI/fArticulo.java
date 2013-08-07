@@ -14,8 +14,7 @@ import entidades.Videojuego;
 public class fArticulo extends javax.swing.JFrame {
 
     
-    Conexion conec;
-    Articulo art;
+    
     public fArticulo() {
         initComponents();
     }
@@ -242,6 +241,8 @@ public class fArticulo extends javax.swing.JFrame {
         Pelicula peli = new Pelicula ();
         Videojuego vide = new Videojuego ();
         String opc=(String)aArticulo.getSelectedItem();
+        Conexion conec = new Conexion("iMovie","clustersito");
+        conec.abrirConexion();
         switch(opc){
         case "Pelicula": 
             peli.setClave(aClave.getText());
@@ -250,6 +251,7 @@ public class fArticulo extends javax.swing.JFrame {
             peli.setAño(aAnio.getText());
             peli.setClasificacion(aClasificacion.getText());
             peli.setTipo((String)aTipo.getSelectedItem());
+            
             
         break;
         case "Videojuego": 
